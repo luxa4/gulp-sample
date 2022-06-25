@@ -48,3 +48,9 @@ task('imagemin', function () {
         .pipe(dest('dist/images'))
 });
 
+task('watching', function () {
+    watch(['src/**/*'], series('clean'));
+})
+
+
+exports.default = parallel('watching')
