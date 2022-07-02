@@ -7,3 +7,4 @@ task('compress', function() {
     .pipe(uglify())
     .pipe(dest('dist'));
 });
+

@@ -1,26 +1,28 @@
 import gulp from 'gulp';
 import { path } from './gulp/config/path.js';
-
+import { plugins } from './gulp/config/plugins.js';
 
 global.app = {
   path,
-  gulp
+  gulp,
+  plugins
 };
 
 // import tasks
 import copy from './gulp/tasks/copy.js';
 import delDist from './gulp/tasks/delDist.js';
 import html from './gulp/tasks/html.js';
+import server from './gulp/tasks/server.js';
 
 function watcher() {
   gulp.watch(app.path.watch.files, copy);
-  gulp.watch(app.path.watch.html, copy);
+  gulp.watch(app.path.watch.html, html);
 }
 
 const mainTask = gulp.parallel(copy, html);
 
 // Scenarios
-const dev = gulp.series(delDist, mainTask, watcher);
+const dev = gulp.series(delDist, mainTask, gulp.parallel(server, watcher));
 const prod = gulp.series(mainTask, watcher);
 
 gulp.task('default', dev);
