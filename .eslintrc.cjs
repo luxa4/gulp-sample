@@ -15,6 +15,7 @@ module.exports = {
     'no-var': ['error'],
     'object-curly-spacing': ['error', 'always'],
     "comma-dangle": ["error", "never"],
-    "require-jsdoc" : 0
+    "require-jsdoc" : 0,
+    'max-len': ["error", { "code": 120 }]
   },
 };

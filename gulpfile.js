@@ -21,7 +21,7 @@ function watcher() {
   gulp.watch(app.path.watch.css, css);
 }
 
-const mainTask = gulp.parallel(copy, html);
+const mainTask = gulp.parallel(copy, html, css);
 
 // Scenarios
 const dev = gulp.series(delDist, mainTask, gulp.parallel(server, watcher));
