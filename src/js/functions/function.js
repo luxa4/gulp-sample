@@ -1,6 +1,4 @@
-window.addEventListener('DOMContentLoaded', supportFormatWebp);
-
-function supportFormatWebp() {
+export default function supportFormatWebp() {
   const elem = document.createElement('canvas');
 
   if (!!(elem.getContext && elem.getContext('2d'))) {
@@ -8,8 +6,7 @@ function supportFormatWebp() {
     if (isSupport) {
       document.documentElement.classList.add('webp');
     }
-    return isSupport;
   } else {
-    return false;
+    document.documentElement.classList.add('no-webp');
   }
 }
