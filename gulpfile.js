@@ -17,6 +17,7 @@ import css from './gulp/tasks/css.js';
 import js from './gulp/tasks/js.js';
 import image from './gulp/tasks/image.js';
 import ftp from './gulp/tasks/ftp.js';
+import { otfToTtf, ttfToWoff, fontsStyle } from './gulp/tasks/font.js';
 
 function watcher() {
   gulp.watch(app.path.watch.files, copy);
@@ -26,7 +27,8 @@ function watcher() {
   gulp.watch(app.path.watch.image, image);
 }
 
-const mainTask = gulp.parallel(copy, html, css, js, image);
+const fonts = gulp.series(otfToTtf, ttfToWoff, fontsStyle);
+const mainTask = gulp.series(fonts, gulp.parallel(copy, html, css, js, image));
 
 // Scenarios
 const dev = gulp.series(delDist, mainTask, gulp.parallel(server, watcher));
